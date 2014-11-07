@@ -7,21 +7,21 @@
 //
 
 #import "ViewController.h"
+#import "MAKMonthPicker.h"
+
+static const NSTimeInterval ktTimeInMonth = 60 * 60 * 24 * 31;
 
 @interface ViewController ()
-
+@property (weak, nonatomic) IBOutlet MAKMonthPicker *monthPicker;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    self.monthPicker.format =  MAKMonthPickerFormatMonth | MAKMonthPickerFormatYear;
+    self.monthPicker.monthFormat = @"%n | %c";
+    self.monthPicker.date = [NSDate dateWithTimeIntervalSinceNow:-ktTimeInMonth];
+    self.monthPicker.yearRange = NSMakeRange(2000, 2018);
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 @end
