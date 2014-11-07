@@ -10,7 +10,24 @@
 
 static inline void getCurrentYearAndMonth(NSInteger *year, NSInteger *month, NSDate *date) {
     NSCalendar *const calendar = [NSCalendar currentCalendar];
-    [calendar getEra:nil year:year month:month day:nil fromDate:date];
+    if ([calendar respondsToSelector:@selector(getEra:year:month:day:fromDate:)]) {
+        [calendar getEra:nil year:year month:month day:nil fromDate:date]; //iOS 8
+    } else {
+        NSCalendarUnit unit;
+        if (year != NULL) {
+            unit |= NSCalendarUnitYear;
+        }
+        if (month != NULL) {
+            unit |= NSCalendarUnitMonth;
+        }
+        NSDateComponents *components = [calendar components:unit fromDate:date];
+        if (year != NULL) {
+            *year = components.year;
+        }
+        if (month != NULL) {
+            *month = components.month;
+        }
+    }
 }
 
 static inline BOOL isBitMaskEnabled(NSInteger value, NSInteger mask) {
@@ -151,7 +168,14 @@ static const NSInteger kNumberOfMonthsInYear =  12;
 
 #pragma mark - <UIPickerViewDataSource>
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return isMonthComponentEnabled(self.format) + isYearComponentEnabled(self.format);
+    NSInteger res = 0;
+    if (isMonthComponentEnabled(self.format)) {
+        ++res;
+    }
+    if (isYearComponentEnabled(self.format)) {
+        ++res;
+    }
+    return res;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
@@ -178,10 +202,10 @@ static const NSInteger kNumberOfMonthsInYear =  12;
 #pragma mark - Private
 - (NSString *)titleForMonthAtRow:(NSInteger)row {
     NSString* title = [self.monthFormat copy];
-    if ([title containsString:kMonthCodeFormat]) {
+    if ([title rangeOfString:kMonthCodeFormat].location != NSNotFound) {
         title = [title stringByReplacingOccurrencesOfString:kMonthCodeFormat withString:[self titleForMonthIndexAtRow:row]];
     }
-    if ([title containsString:kMonthNameFormat]) {
+    if ([title rangeOfString:kMonthNameFormat].location != NSNotFound) {
         title = [title stringByReplacingOccurrencesOfString:kMonthNameFormat withString:[self titleForMonthNameAtRow:row]];
     }
     return title;

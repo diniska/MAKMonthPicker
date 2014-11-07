@@ -20,7 +20,7 @@ static const NSTimeInterval ktTimeInMonth = 60 * 60 * 24 * 31;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.monthPicker.format =  MAKMonthPickerFormatMonth | MAKMonthPickerFormatYear;
-    self.monthPicker.monthFormat = @"%n | %c";
+    self.monthPicker.monthFormat = @"%n |%c";
     self.monthPicker.date = [NSDate dateWithTimeIntervalSinceNow:-ktTimeInMonth];
     self.monthPicker.yearRange = NSMakeRange(2000, 2018);
 }
