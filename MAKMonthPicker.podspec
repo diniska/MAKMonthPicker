@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
                    DESC
 
   s.homepage     = "https://github.com/diniska/MAKMonthPicker"
-  s.screenshots  = "raw.githubusercontent.com/diniska/MAKMonthPicker/master/Screens/screen1.png", "raw.githubusercontent.com/diniska/MAKMonthPicker/master/Screens/screen2.png","raw.githubusercontent.com/diniska/MAKMonthPicker/master/Screens/screen3.png"
+  s.screenshots  = "https://raw.githubusercontent.com/diniska/MAKMonthPicker/master/Screens/screen1.png", "https://raw.githubusercontent.com/diniska/MAKMonthPicker/master/Screens/screen2.png","https://raw.githubusercontent.com/diniska/MAKMonthPicker/master/Screens/screen3.png"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -37,7 +37,7 @@ Pod::Spec.new do |s|
   #
 
   # s.license      = "MIT (example)"
-  s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
+  s.license      = { :type => "MIT", :file => "LICENSE" }
 
 
   # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
