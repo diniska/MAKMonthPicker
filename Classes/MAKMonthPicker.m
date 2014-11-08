@@ -153,12 +153,14 @@ static const NSInteger kNumberOfMonthsInYear =  12;
     const BOOL needToUpdateYearValue = NSLocationInRange(_selectedYear, yearRange);
     if (isMonthComponentEnabled(self.format)) {
         if (isYearComponentEnabled(self.format)) {
+            _numberOfRowsInComponent[1] = yearRange.length;
             [self reloadComponent:1];
             if (needToUpdateYearValue) {
                 [self selectRow:_selectedYear - _yearRange.location inComponent:1 animated:NO];
             }
         }
     } else if (isYearComponentEnabled(self.format)) {
+        _numberOfRowsInComponent[0] = yearRange.length;
         [self reloadComponent:0];
         if (needToUpdateYearValue) {
             [self selectRow:_selectedYear - _yearRange.location inComponent:1 animated:NO];
