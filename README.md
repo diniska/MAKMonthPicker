@@ -15,7 +15,7 @@ pod 'MAKMonthPicker', '~> 0.0'
 self.monthPicker.format =  MAKMonthPickerFormatMonth | MAKMonthPickerFormatYear;
 self.monthPicker.monthFormat = @"%n | %c";
 self.monthPicker.date = [NSDate dateWithTimeIntervalSinceNow:-ktTimeInMonth];
-self.monthPicker.yearRange = NSMakeRange(2000, 2018);
+self.monthPicker.yearRange = NSMakeRange(2000, 100);
 ```
 The result looks like:
 
