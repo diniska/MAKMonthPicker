@@ -214,7 +214,7 @@ static const NSInteger kNumberOfMonthsInYear =  12;
 }
 
 - (NSString *)titleForMonthNameAtRow:(NSInteger)row {
-    NSArray *const monthNames = [_dateFormatter monthSymbols];
+    NSArray *const monthNames = [_dateFormatter standaloneMonthSymbols];
     return monthNames[row];
 }
 
