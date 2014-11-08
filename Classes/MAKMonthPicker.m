@@ -13,7 +13,7 @@ static inline void getCurrentYearAndMonth(NSInteger *year, NSInteger *month, NSD
     if ([calendar respondsToSelector:@selector(getEra:year:month:day:fromDate:)]) {
         [calendar getEra:nil year:year month:month day:nil fromDate:date]; //iOS 8
     } else {
-        NSCalendarUnit unit;
+        NSCalendarUnit unit = 0;
         if (year != NULL) {
             unit |= NSCalendarUnitYear;
         }
@@ -98,7 +98,7 @@ static const NSInteger kNumberOfMonthsInYear =  12;
 - (NSDate *)date {
     NSDateComponents *const components = [[NSDateComponents alloc] init];
     components.month = _selectedMonth;
-    components.year = _selectedMonth;
+    components.year = _selectedYear;
     return [[NSCalendar currentCalendar] dateFromComponents:components];
 }
 
@@ -227,16 +227,24 @@ static const NSInteger kNumberOfMonthsInYear =  12;
 
 - (void)updateSelectedDateAnimated:(BOOL)animated {
     switch (self.format) {
-        case MAKMonthPickerFormatMonth:
-            [self selectRow:_selectedMonth - 1 inComponent:0 animated:animated];
+        case MAKMonthPickerFormatMonth: {
+            [self checkAndSelectRow:_selectedMonth - 1 inComponent:0 animated:animated];
             break;
+        }
         case MAKMonthPickerFormatYear:
-            [self selectRow:_selectedYear - _yearRange.location inComponent:0 animated:animated];
+            [self checkAndSelectRow:_selectedYear - _yearRange.location inComponent:0 animated:animated];
             break;
-        default:
-            [self selectRow:_selectedMonth - 1 inComponent:0 animated:animated];
-            [self selectRow:_selectedYear - _yearRange.location inComponent:1 animated:animated];
+        default: {
+            [self checkAndSelectRow: _selectedMonth - 1 inComponent:0 animated:animated];
+            [self checkAndSelectRow:_selectedYear - _yearRange.location inComponent:1 animated:animated];
             break;
+        }
+    }
+}
+
+- (void)checkAndSelectRow:(NSInteger)row inComponent:(NSInteger)component animated:(BOOL)animated {
+    if (row >= 0 && row < _numberOfRowsInComponent[component]) {
+        [self selectRow:row inComponent:component animated:animated];
     }
 }
 @end
