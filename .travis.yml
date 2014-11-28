@@ -1,5 +1,5 @@
 language: objective-c
 
-xcode_project: Example/MAKMonthPicker.xcodeproj # path to your xcodeproj folder
-xcode_scheme: MAKMonthPicker
+xcode_project: Example/MonthPicker.xcodeproj # path to your xcodeproj folder
+xcode_scheme: MonthPicker
 xcode_sdk: iphonesimulator
