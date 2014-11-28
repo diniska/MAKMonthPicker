@@ -1,6 +1,9 @@
 MAKMonthPicker
 ==============
 
+[![CI Status](http://img.shields.io/travis/diniska/MAKMonthPicker.svg?style=flat)](https://travis-ci.org/diniska/MAKMonthPicker)
+[![Version](https://img.shields.io/cocoapods/v/MAKMonthPicker.svg?style=flat)](http://cocoadocs.org/docsets/MAKMonthPicker)
+
 iOS customizable month picker component
 
 ## Installation
